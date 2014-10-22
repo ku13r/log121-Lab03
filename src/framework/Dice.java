@@ -7,15 +7,27 @@ public class Dice implements Comparable<Dice> {
 	private int numberOfFace;
 	private int lastRollValue;
 	
+	/**
+	 * Constructeur
+	 * @param numberOfFace
+	 */
 	public Dice(int numberOfFace) {
 		this.numberOfFace = numberOfFace;
 	}
 	
-	public int calculerRandomNumber() {
+	/**
+	 * Retourne un nombre aléatoire entre 1 et le nombre de face du dé.
+	 * @return int
+	 */
+	public int rollDice() {
 		Random rand = new Random();
 		return lastRollValue = rand.nextInt((this.numberOfFace - 1) + 1) + 1; 
 	}
-
+	
+	/**
+	 * Compare la valeur roulée par deux dés.
+	 * @return int
+	 */
 	@Override
 	public int compareTo(Dice o) {
 		return o.getLastRollValue() - lastRollValue;

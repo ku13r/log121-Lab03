@@ -20,24 +20,24 @@ public class DiceTest {
 	public void deSuperieurTest() {
 		de1.setLastRollValue(4);
 		de2.setLastRollValue(5);
-		assertTrue(de1.compareTo(de2)==1);
+		assertTrue(de1.compareTo(de2) == 1);
 	}
 	
 	@Test
-	public void deInferieurTest(){
+	public void deInferieurTest() {
 		de1.setLastRollValue(4);
 		de2.setLastRollValue(5);
-		assertTrue(de2.compareTo(de1)==-1);
+		assertTrue(de2.compareTo(de1) == -1);
 	}
 	
 	@Test
-	public void memeDeTest(){
+	public void memeDeTest() {
 		de1.setLastRollValue(4);
-		assertTrue(de1.compareTo(de1)==0);
+		assertTrue(de1.compareTo(de1) == 0);
 	}
 
 	@Test(expected=IllegalArgumentException.class)
-	public void deNullTest(){
+	public void deNullTest() {
 		de1.setLastRollValue(4);
 		de1.compareTo(null);
 	}

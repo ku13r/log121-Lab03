@@ -9,6 +9,10 @@ public class PlayerIterator implements Iterator {
 	private List<Player> playersList;
 	private int currentPos = 0;
 	
+	/**
+	 * Constructeur
+	 * @param playersList
+	 */
 	public PlayerIterator(List<Player> playersList) {
 		this.playersList = playersList;
 	}

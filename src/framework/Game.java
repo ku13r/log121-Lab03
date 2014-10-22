@@ -1,10 +1,17 @@
 package framework;
 
-public class Game {
+import framework.gamerules.RulesStrategy;
+
+public abstract class Game {
 	
 	private int currentTurn = 0;
+	private RulesStrategy gameRules;
 	
-	public Game() {
+	public void calculateThisTurnScore() {
+		
+	}
+	
+	public void calculateThisGameWinner() {
 		
 	}
 	

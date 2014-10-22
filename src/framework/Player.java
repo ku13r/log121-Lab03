@@ -1,11 +1,25 @@
 package framework;
 
-public class Player {
-	
+public class Player implements Comparable<Player> {
+
 	private int score;
+	private String name;
 	
-	public Player() {
-		
+	/**
+	 * Constructeur
+	 * @param Le nom du joueur
+	 */
+	public Player(String name) {
+		this.setName(name);
+	}
+	
+	/**
+	 * Compare le score entre deux joueurs.
+	 * @return int
+	 */
+	@Override
+	public int compareTo(Player o) {
+		return o.getScore() - score;
 	}
 
 	/**
@@ -20,6 +34,20 @@ public class Player {
 	 */
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

@@ -35,6 +35,7 @@ public class Dice implements Comparable<Dice> {
 	 */
 	public int rollDice() {
 		Random rand = new Random();
+
 		return lastRollValue = rand.nextInt(this.numberOfFace + 1); 
 	}
 	

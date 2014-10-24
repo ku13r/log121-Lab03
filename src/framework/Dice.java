@@ -16,16 +16,16 @@ public class Dice implements Comparable<Dice> {
 	}
 	
 	/**
-	 * Retourne un nombre aléatoire entre 1 et le nombre de face du dé.
+	 * Retourne un nombre al��atoire entre 1 et le nombre de face du d��.
 	 * @return int
 	 */
 	public int rollDice() {
 		Random rand = new Random();
-		return lastRollValue = rand.nextInt((this.numberOfFace - 1) + 1) + 1; 
+		return lastRollValue = rand.nextInt(this.numberOfFace + 1); 
 	}
 	
 	/**
-	 * Compare la valeur roulée par deux dés.
+	 * Compare la valeur roul��e par deux d��s.
 	 * @return int
 	 */
 	@Override

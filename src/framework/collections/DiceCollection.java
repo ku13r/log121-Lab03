@@ -1,3 +1,15 @@
+/******************************************************
+Cours:  LOG121
+Projet: Laboratoire #3
+Nom du fichier: DiceCollection.java
+Date créé: 2014-10-21
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Hugo Deschamps
+2014-10-21 Version initiale
+*******************************************************/ 
+
 package framework.collections;
 
 import framework.Dice;
@@ -18,7 +30,7 @@ public class DiceCollection implements Collection {
 	}
 	
 	/**
-	 * Ajoute un dé à la liste de dés.
+	 * Ajoute un d�� �� la liste de d��s.
 	 * @param dice
 	 */
 	public void addDice(Dice dice) {
@@ -26,7 +38,7 @@ public class DiceCollection implements Collection {
 	}
 	
 	/**
-	 * Retourne un itérateur parcourant la liste de dés.
+	 * Retourne un it��rateur parcourant la liste de d��s.
 	 */
 	@Override
 	public DiceIterator createIterator() {

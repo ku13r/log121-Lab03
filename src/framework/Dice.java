@@ -1,9 +1,23 @@
+/******************************************************
+Cours:  LOG121
+Projet: Laboratoire #3
+Nom du fichier: Dice.java
+Date créé: 2014-10-21
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Hugo Deschamps
+2014-10-21 Version initiale
+*******************************************************/ 
+
 package framework;
+ 
+
 
 import java.util.Random;
 
 public class Dice implements Comparable<Dice> {
-	
+
 	private int numberOfFace;
 	private int lastRollValue;
 	

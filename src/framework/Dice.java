@@ -8,12 +8,10 @@ Historique des modifications
 *******************************************************
 *@author Hugo Deschamps
 2014-10-21 Version initiale
+2014-11-07 Ajout d'exception compareTo (Simon)
 *******************************************************/ 
 
 package framework;
- 
-
-
 import java.util.Random;
 
 public class Dice implements Comparable<Dice> {
@@ -45,6 +43,8 @@ public class Dice implements Comparable<Dice> {
 	 */
 	@Override
 	public int compareTo(Dice o) {
+		if((o == null)|| (o.getClass() != this.getClass()))
+			throw new  IllegalArgumentException("Dé invalide");
 		return o.getLastRollValue() - lastRollValue;
 	}
 

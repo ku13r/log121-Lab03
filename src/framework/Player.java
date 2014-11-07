@@ -8,6 +8,7 @@ Historique des modifications
 *******************************************************
 *@author Hugo Deschamps
 2014-10-21 Version initiale
+2014-11-07 Ajout d'exception compareTo (Simon)
 *******************************************************/  
 
 package framework;
@@ -31,6 +32,8 @@ public class Player implements Comparable<Player> {
 	 */
 	@Override
 	public int compareTo(Player o) {
+		if((o == null)||(o.getClass() != this.getClass()))
+			throw new IllegalArgumentException("Joueur non valide");
 		return o.getScore() - score;
 	}
 

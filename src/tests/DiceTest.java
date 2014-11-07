@@ -8,6 +8,7 @@ Historique des modifications
 *******************************************************
 *@author Hugo Deschamps
 2014-10-21 Version initiale
+2014-11-07 Ajout d'exception compareTo (Simon)
 *******************************************************/ 
 
 package tests;
@@ -32,14 +33,14 @@ public class DiceTest {
 	public void deSuperieurTest() {
 		de1.setLastRollValue(4);
 		de2.setLastRollValue(5);
-		assertTrue(de1.compareTo(de2) == 1);
+		assertTrue(de1.compareTo(de2) >= 1);
 	}
 	
 	@Test
 	public void deInferieurTest() {
 		de1.setLastRollValue(4);
-		de2.setLastRollValue(5);
-		assertTrue(de2.compareTo(de1) == -1);
+		de2.setLastRollValue(6);
+		assertTrue(de2.compareTo(de1) <= -1);
 	}
 	
 	@Test

@@ -17,11 +17,20 @@ public class PlayerIterator implements Iterator {
 		this.playersList = playersList;
 	}
 	
+	/**
+	 * Vérifi si il reste des éléments à itérer.
+	 * @return boolean
+	 */
 	@Override
 	public boolean hasNext() {
-		return (currentPos + 1 < playersList.size()) ? true : false;
+		return (currentPos < playersList.size()) ? true : false;
 	}
-
+	
+	/**
+	 * Retourne le prochain élément dans la liste et
+	 * incrémente la position actuel dans la liste de 1.
+	 * @return Die
+	 */
 	@Override
 	public Player next() {
 		Player player = playersList.get(currentPos);

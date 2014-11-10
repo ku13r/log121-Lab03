@@ -1,19 +1,19 @@
 package tests;
 
 import static org.junit.Assert.*;
-import framework.Dice;
+import framework.Die;
 
 import org.junit.*;
 
 public class DiceTest {
 	
-	private Dice de1;
-	private Dice de2;
+	private Die de1;
+	private Die de2;
 	
 	@Before
 	public void faireAvant() {
-		de1 = new Dice(6);
-		de2 = new Dice(6);
+		//de1 = new Dice(6);
+		//de2 = new Dice(6);
 	}
 	
 	@Test
@@ -21,6 +21,7 @@ public class DiceTest {
 		de1.setLastRollValue(4);
 		de2.setLastRollValue(5);
 		assertTrue(de1.compareTo(de2) == 1);
+		System.out.println("ALLO");
 	}
 	
 	@Test

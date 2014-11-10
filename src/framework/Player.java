@@ -13,12 +13,19 @@ public class Player implements Comparable<Player> {
 		this.setName(name);
 	}
 	
+	public void addScore(int score) {
+		this.score += score;
+	}
+	
 	/**
 	 * Compare le score entre deux joueurs.
 	 * @return int
 	 */
 	@Override
 	public int compareTo(Player o) {
+		if(o == null)
+			throw new IllegalArgumentException("Joueur invalide.");
+		
 		return o.getScore() - score;
 	}
 

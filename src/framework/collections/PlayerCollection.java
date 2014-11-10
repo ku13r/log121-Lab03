@@ -9,11 +9,13 @@ import java.util.ArrayList;
 public class PlayerCollection implements Collection {
 	
 	private List<Player> players;
+	private int nbOfPlayers;
 	
 	/**
 	 * Constructeur.
 	 */
 	public PlayerCollection() {
+		nbOfPlayers = 0;
 		this.players = new ArrayList<Player>();
 	}
 	
@@ -23,6 +25,7 @@ public class PlayerCollection implements Collection {
 	 */
 	public void addPlayer(Player player) {
 		players.add(player);
+		nbOfPlayers++;
 	}
 	
 	/**
@@ -31,6 +34,10 @@ public class PlayerCollection implements Collection {
 	@Override
 	public PlayerIterator createIterator() {
 		return new PlayerIterator(players);
+	}
+	
+	public int getNbOfPlayers() {
+		return nbOfPlayers;
 	}
 	
 }

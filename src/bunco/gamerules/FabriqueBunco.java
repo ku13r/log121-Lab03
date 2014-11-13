@@ -1,23 +1,49 @@
+/****************************************************** 
+Cours : LOG121
+Session : A2014
+Groupe : 01
+Projet : Laboratoire #3 
+Étudiant(e)(s) : Hugo Deschamps
+				 Nicolas Pinard
+				 Simon Lafontaine
+Code(s) perm. : AM46850
+				AM38000
+				AM37640
+Professeur : Ghizlane El boussaidi
+Chargés de labo : Alvine Boaye Belle et Michel Gagnon
+Nom du fichier : FabriqueBunco.java
+Date créé : Nov 3, 2014
+Date dern. modif. Nov 11, 2014 
+******************************************************* 
+Historique des modifications 
+******************************************************* 
+2014-11-03 Version initiale
+*******************************************************/
+
 package bunco.gamerules;
 
-import framework.Die;
 import framework.Fabrique;
-import framework.Player;
-import framework.collections.DiceCollection;
-import framework.collections.PlayerCollection;
+import framework.Joueur;
+import framework.collections.CollectionDe;
+import framework.collections.CollectionJoueur;
 
 public class FabriqueBunco extends Fabrique {
 
 	private int nbPlayers;
-	private int nbDices;
+	private int nbDice;
 	
-	public FabriqueBunco(int nbPlayers, int nbDices) {
-		super(6);
+	/**
+	 * Constructeur
+	 * @param nbPlayers
+	 * @param nbDices
+	 */
+	public FabriqueBunco(int nbPlayers, int nbDices, int nbTours) {
+		super(nbTours);
 		
-		players = new PlayerCollection();
-		dices = new DiceCollection();
+		players = new CollectionJoueur();
+		dice = new CollectionDe();
 		
-		this.nbDices = nbDices;
+		this.nbDice = nbDices;
 		this.nbPlayers = nbPlayers;
 		
 		createGame(new BuncoStrategy());
@@ -28,7 +54,7 @@ public class FabriqueBunco extends Fabrique {
 		int i;
 		
 		for(i=0; i<nbPlayers; i++) {
-			players.addPlayer(new Player("Player "+(i+1)));
+			players.addPlayer(new Joueur("Player "+(i+1)));
 		}
 	}
 
@@ -36,8 +62,8 @@ public class FabriqueBunco extends Fabrique {
 	protected void createDice() {
 		int i;
 		
-		for(i=0; i<nbDices; i++) {
-			dices.addDice(new DieWithNumber(6));
+		for(i=0; i<nbDice; i++) {
+			dice.addDice(new DieWithNumber(6));
 		}
 	}
 

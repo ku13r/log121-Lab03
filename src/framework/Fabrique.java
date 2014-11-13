@@ -1,34 +1,66 @@
+/****************************************************** 
+Cours : LOG121
+Session : A2014
+Groupe : 01
+Projet : Laboratoire #3 
+Étudiant(e)(s) : Hugo Deschamps
+				 Nicolas Pinard
+				 Simon Lafontaine
+Code(s) perm. : AM46850
+				AM38000
+				AM37640
+Professeur : Ghizlane El boussaidi
+Chargés de labo : Alvine Boaye Belle et Michel Gagnon
+Nom du fichier : Fabrique.java
+Date créé : Nov 3, 2014
+Date dern. modif. Nov 11, 2014 
+******************************************************* 
+Historique des modifications 
+******************************************************* 
+2014-11-03 Version initiale
+*******************************************************/
+
 package framework;
 
-import framework.collections.DiceCollection;
-import framework.collections.PlayerCollection;
-import framework.gamerules.GameStrategy;
+import framework.collections.CollectionDe;
+import framework.collections.CollectionJoueur;
+import framework.gamerules.StrategieJeu;
 
 public abstract class Fabrique {
 
-	protected PlayerCollection players;
-	protected DiceCollection dices;
+	protected CollectionJoueur players;
+	protected CollectionDe dice;
 	
-	protected Game game;
+	protected Jeu game;
 	
 	private int nbOfTurns;
 	
+	/**
+	 * Constructeur
+	 * @param nbOfTurns
+	 */
 	public Fabrique(int nbOfTurns) {
 		this.nbOfTurns = nbOfTurns;
 	}
 	
-	public final void createGame(GameStrategy gameStrategy) {
+	/**
+	 * Méthode principal qui crée les joueurs, les dés et initialise le jeu.
+	 * @param gameStrategy
+	 */
+	public final void createGame(StrategieJeu gameStrategy) {
 		createPlayer();
 		createDice();
-		game = new Game(nbOfTurns, players, dices, gameStrategy);
-		
-		for(int i=0; i<nbOfTurns; i++)
-			game.calculateTurnScore();
-		
-		game.calculateThisGameWinner();
+		game = new Jeu(nbOfTurns, gameStrategy);
+		game.jouer(players, dice);
 	}
 	
+	/**
+	 * crée les joueurs.
+	 */
 	protected abstract void createPlayer();
 	
+	/**
+	 * crée les joueurs.
+	 */
 	protected abstract void createDice();
 }

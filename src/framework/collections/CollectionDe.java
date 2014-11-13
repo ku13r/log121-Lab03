@@ -11,7 +11,7 @@ Code(s) perm. : AM46850
 				AM37640
 Professeur : Ghizlane El boussaidi
 Chargés de labo : Alvine Boaye Belle et Michel Gagnon
-Nom du fichier : Face.java
+Nom du fichier : CollectionDe.java
 Date créé : Nov 3, 2014
 Date dern. modif. Nov 11, 2014 
 ******************************************************* 
@@ -20,44 +20,45 @@ Historique des modifications
 2014-11-03 Version initiale
 *******************************************************/
 
-package framework;
+package framework.collections;
 
-public class Face {
-	
-	protected int value;
-	protected String content;
+import framework.De;
 
-	public Face(String content, int value) {
-		this.content = content;
-		this.value = value;
-	}
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+
+public class CollectionDe {
+
+	private List<De> dice;
+	private int nbOfDices;
 	
 	/**
-	 * @return the value
+	 * Constructeur
 	 */
-	public int getValue() {
-		return value;
-	}
-
-	/**
-	 * @param value the value to set
-	 */
-	public void setValue(int value) {
-		this.value = value;
+	public CollectionDe() {
+		nbOfDices = 0;
+		this.dice = new ArrayList<De>();
 	}
 	
 	/**
-	 * @return the content
+	 * Ajoute un dé à la liste de dés.
+	 * @param dice
 	 */
-	public String getContent() {
-		return content;
-	}
-
-	/**
-	 * @param content the content to set
-	 */
-	public void setContent(String content) {
-		this.content = content;
+	public void addDice(De die) {
+		dice.add(die);
+		nbOfDices++;
 	}
 	
+	/**
+	 * Retourne un itérateur parcourant la liste de dés.
+	 */
+	public Iterator<De> createIterator() {
+		return dice.iterator();
+	}
+	
+	public int getNbOfDices() {
+		return nbOfDices;
+	}
+
 }

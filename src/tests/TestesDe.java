@@ -11,7 +11,7 @@ Code(s) perm. : AM46850
 				AM37640
 Professeur : Ghizlane El boussaidi
 Chargés de labo : Alvine Boaye Belle et Michel Gagnon
-Nom du fichier : RulesBuncoTest.java
+Nom du fichier : TestesDe.java
 Date créé : Nov 3, 2014
 Date dern. modif. Nov 11, 2014 
 ******************************************************* 
@@ -23,27 +23,45 @@ Historique des modifications
 package tests;
 
 import static org.junit.Assert.*;
-import framework.Jeu;
-import framework.Joueur;
 import framework.De;
 
 import org.junit.*;
 
-import bunco.gamerules.FabriqueBunco;
-
-public class RulesBuncoTest {
+public class TestesDe {
 	
-	private FabriqueBunco bunco;
-	private Jeu game;
+	private De de1;
+	private De de2;
 	
 	@Before
 	public void faireAvant() {
-		bunco = new FabriqueBunco(5, 3, 6);
+		//de1 = new Dice(6);
+		//de2 = new Dice(6);
 	}
 	
 	@Test
-	public void troisDesIdentiqueBunco() {
-		System.out.println("Testing");
+	public void deSuperieurTest() {
+		de1.setLastRollValue(4);
+		de2.setLastRollValue(5);
+		assertTrue(de1.compareTo(de2) == 1);
+		System.out.println("ALLO");
 	}
 	
+	@Test
+	public void deInferieurTest() {
+		de1.setLastRollValue(4);
+		de2.setLastRollValue(5);
+		assertTrue(de2.compareTo(de1) == -1);
+	}
+	
+	@Test
+	public void memeDeTest() {
+		de1.setLastRollValue(4);
+		assertTrue(de1.compareTo(de1) == 0);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void deNullTest() {
+		de1.setLastRollValue(4);
+		de1.compareTo(null);
+	}
 }

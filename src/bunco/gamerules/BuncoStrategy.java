@@ -1,153 +1,129 @@
+/****************************************************** 
+Cours : LOG121
+Session : A2014
+Groupe : 01
+Projet : Laboratoire #3 
+Étudiant(e)(s) : Hugo Deschamps
+				 Nicolas Pinard
+				 Simon Lafontaine
+Code(s) perm. : AM46850
+				AM38000
+				AM37640
+Professeur : Ghizlane El boussaidi
+Chargés de labo : Alvine Boaye Belle et Michel Gagnon
+Nom du fichier : BuncoStrategy.java
+Date créé : Nov 3, 2014
+Date dern. modif. Nov 11, 2014 
+******************************************************* 
+Historique des modifications 
+******************************************************* 
+2014-11-03 Version initiale
+*******************************************************/
+
 package bunco.gamerules;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Iterator;
 
-import framework.Die;
-import framework.Game;
-import framework.Player;
-import framework.collections.DiceCollection;
-import framework.collections.PlayerCollection;
-import framework.gamerules.GameStrategy;
-import framework.utils.DiceIterator;
-import framework.utils.PlayerIterator;
+import framework.De;
+import framework.Jeu;
+import framework.Joueur;
+import framework.collections.CollectionDe;
+import framework.collections.CollectionJoueur;
+import framework.gamerules.StrategieJeu;
 
-public class BuncoStrategy implements GameStrategy {
+public class BuncoStrategy implements StrategieJeu {
 	
 	/**
-	 * 
+	 * Calcule le score du joueur actuel selon les 
+	 * valeurs des dés qu'il a rouler et détermine si
+	 * il continue de jouer ou termine son tour.
+	 * @param Jeu
 	 */
 	@Override
-	public void calculateThisTurnScore(Game game) {
+	public void calculateThisTurnScore(Jeu game) {
+		CollectionDe collectionDe = game.getDes();
+		Iterator<De> diceIterator = collectionDe.createIterator();
 		
-		DiceCollection dices = game.getDices();
-		PlayerCollection players = game.getPlayers();
+		De lastDie = null;
+		De currDie = null;
 		
-		int nbDices = dices.getNbOfDices();
+		Joueur currPlayer = game.getCurrPlayer();
 		
-		DiceIterator diceIterator;
-		PlayerIterator playerIterator = players.createIterator();
-
-		int tempPlayerScore;
+		System.out.println(currPlayer.getName());
 		
-		Boolean currPlayerTurn;
+		int currTurn = game.getCurrTurn();
 		
-		Player currPlayer = null;
-		Die currDie;
-		Die lastDie;
+		int i = 0;
+		int j = 0;
+		int k = 0;
 		
-		//index que l'on incrémente si aucun des dés est égal
-		//au numémro du tour actuel.
-		int j;
-		
-		//index que l'on incrémente si la valeur du dé est égal au tour actuel.
-		int k;
-		
-		//index que l'on incrémente si les dés on la même valeur mais pas égal au tour actuel.
-		int l;
-		
-		//Boucle qui fait jouer chaque joueurs
-		while(playerIterator.hasNext()) {
-			currPlayer = playerIterator.next();
-			currPlayerTurn = true;
-			tempPlayerScore = 0;
-			
-			System.out.println("C'est le tour du " + currPlayer.getName());
-			
-			//Boucle permet au joueur actuel de rejouer
-			while(currPlayerTurn) {
-				diceIterator = dices.createIterator();
-				lastDie = null;
-				currDie = null;
-				j = 0;
-				k = 0;
-				l = 0;
-
-				//Boucle qui roule les dés
-				while(diceIterator.hasNext()) {
-					currDie = diceIterator.next();
-					currDie.rollDice();
-					
-					System.out.println("DIE ROLL = "+currDie.getLastRollValue());
-					
-					if(currDie.getLastRollValue() == 3)
+		while(diceIterator.hasNext()) {
+			currDie = diceIterator.next();
+			if(currDie.getLastRollValue() == currTurn)
+				i++;
+			else {
+				if(lastDie != null) {
+					if(lastDie.compareTo(currDie) != 0)
 						k++;
-					else {
-						if(lastDie != null) {
-							if(lastDie.compareTo(currDie) != 0)
-								j++;
-							else
-								l++;
-						} else {
-							j++;
-							l++;
-						}
-					}
-					
-					lastDie = currDie;
-				} //fin boucle dés
-				
-				System.out.println("k " + k);
-				System.out.println("j " + j);
-				System.out.println("l " + l);
-				
-				//Si le joueur fait un bunco il gagne 21 points
-				//et termine son tour.
-				if(k == nbDices) {
-					System.out.println("BUNCO");
-					tempPlayerScore += 21;
-					currPlayerTurn = false;
-				} else  {
-					tempPlayerScore += k;
+					else
+						j++;
+				} else {
+					k++;
+					j++;
 				}
-				
-				//Si il obtient 3 dés avec des valeurs identiques
-				//Mais pas au tours de la même valeur.
-				if(l == nbDices) {
-					System.out.println("FIVE POINTER");
-					tempPlayerScore += 5;
-				}
-				
-				//Si le compteur arrive à 3, le tour du joeur ce termine.
-				if(j == nbDices) {
-					System.out.println("NEXT PLAYER");
-					currPlayerTurn = false;
-				}
-				
-			} // fin bouclue rejouer
-			System.out.println("SCORE PLAYER "+ tempPlayerScore);
-			currPlayer.addScore(tempPlayerScore);
+			}
 			
-		} //fin boucle pour faire jouer chaque joueurs
+			lastDie = currDie;
+		}
 		
+		System.out.println("i "+ i);
+		System.out.println("j "+ j);
+		System.out.println("k "+ k);
+		System.out.println();
+		
+		//Si i est égal a 3 le joueur a un bunco.
+		if(i == 3) {
+			currPlayer.addScore(21);
+			game.nextPlayerToPlay();
+		} else //Sinon il a un point par dé dont la face est égal au nombre du tour.
+			currPlayer.addScore(i);
+		
+		//Si j égal 3 il a 3 dé identique dont la face n'est pas égail au nombre du tour.
+		if(j == 3)
+			currPlayer.addScore(5);
+		
+		//Si k égal 3 le tour du joueur est terminé et il a aucun points.
+		if(k == 3)
+			game.nextPlayerToPlay();
 	}
 	
 	/**
 	 * Calcule le et mets dans un ordre décroissant 
-	 * les joueurs et leurs score et l'affiche.
-	 * @param Game
+	 * les joueurs et leurs score pour ensuite les afficher.
+	 * @param Jeu
 	 */
 	@Override
-	public void calculateThisGameWinner(Game game) {
-		PlayerCollection players = game.getPlayers();
+	public void calculateThisGameWinner(Jeu game) {
+		CollectionJoueur collectionJoueur = game.getJoueurs();
+		Iterator<Joueur> playerIterator =  collectionJoueur.createIterator();
+		Joueur tempJoueur;
 		
-		PlayerIterator playerIterator = players.createIterator();
-		Player player;
-		
-		List<Player> playersSorted = new ArrayList<Player>();
+		List<Joueur> playersSorted = new ArrayList<Joueur>();
 		
 		while(playerIterator.hasNext()) {
-			player = playerIterator.next();
-			playersSorted.add(player);
+			tempJoueur = playerIterator.next();
+			playersSorted.add(tempJoueur);
 		}
 		
 		Collections.sort(playersSorted);
 		
 		System.out.println("Score finale!");
 		
-		for(Player player1: playersSorted)
-			System.out.println(player1.getName() + " : " + player1.getScore());
+		for(Joueur joueur: playersSorted)
+			System.out.println(joueur.getName() + " : " + joueur.getScore());
 	}
 
 }
